@@ -26,7 +26,7 @@ footer{text-align:center;color:#686255;font-size:11px;padding:20px;border-top:1p
 @media(max-width:540px){.topbar{height:72px;padding:0 18px}.brand{font-size:29px}.user span{display:none}main{width:calc(100% - 28px);padding-top:42px}.grid{grid-template-columns:1fr;gap:12px}.server{min-height:185px}.heading p{font-size:13px}.toolbar{align-items:stretch}.search{width:100%;order:2}.count{order:1}}
 </style></head>
 <body><div class="ambient"></div>
-<header class="topbar"><a class="brand" href="#">أثــر<small>لوحة التحكم</small></a><div class="user"><div class="avatar">م</div><span>مرحباً بك</span></div></header>
+<header class="topbar"><a class="brand" href="index.html">أثــر<small>لوحة التحكم</small></a><div class="user"><div class="avatar">م</div><span>مرحباً بك</span></div></header>
 <main>
 <section class="heading"><div class="eyebrow">أَثَرٌ يَبْقَى وَخَيْرٌ يَمْتَدّ</div><h1>سيرفراتك</h1><p>اختر سيرفر ديسكورد الذي تريد إدارته،<br>واجعل أثر ينشر الخير في مجتمعك.</p></section>
 <div class="toolbar"><div class="count"><b id="serverCount">3</b> سيرفرات متاحة لك</div><label class="search"><input id="search" type="search" placeholder="ابحث عن سيرفر..." aria-label="ابحث عن سيرفر"></label></div>
@@ -43,6 +43,6 @@ footer{text-align:center;color:#686255;font-size:11px;padding:20px;border-top:1p
 // هذه معاينة للواجهة؛ ستُربط لاحقاً بتسجيل دخول Discord لجلب السيرفرات الحقيقية.
 const search=document.getElementById('search');
 search.addEventListener('input',()=>{const q=search.value.trim().toLowerCase();let n=0;document.querySelectorAll('.server').forEach(card=>{const show=card.dataset.name.toLowerCase().includes(q);card.style.display=show?'block':'none';if(show)n++});document.getElementById('empty').style.display=n?'none':'block';document.getElementById('serverCount').textContent=n});
-function manageServer(name){alert('تم اختيار سيرفر: '+name+'\nفي الخطوة التالية نجهز صفحة إعدادات السيرفر.');}
-function addBot(){alert('سيتم ربط هذا الزر بدعوة بوت أثر إلى ديسكورد.');}
+function manageServer(name){localStorage.setItem('atharSelectedServer',name);location.href='dashboard.html';}
+function addBot(){location.href='https://discord.com/oauth2/authorize?client_id=1570407820375888024&permissions=2147601408&scope=bot%20applications.commands';}
 </script></body></html>
