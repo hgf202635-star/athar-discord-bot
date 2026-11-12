@@ -48,3 +48,5 @@ process.on("unhandledRejection", (error) => {
 });
 
 client.login(config.token);
+
+require("./web");
