@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080808"><title>أثر | سيرفراتك</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#d8b66a;--gold2:#f1dda9;--bg:#080808;--panel:#11110f;--line:rgba(216,182,106,.17);--muted:#aaa394;--green:#77c69a}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:var(--bg);color:#f7f3e9;font-family:'IBM Plex Sans Arabic',sans-serif;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.11;background-image:radial-gradient(circle at 50% 40%,transparent 0 20%,#c8a45c 20.1% 20.2%,transparent 20.3% 34%,#c8a45c 34.1% 34.2%,transparent 34.3%),repeating-linear-gradient(135deg,transparent 0 48px,rgba(216,182,106,.08) 49px,transparent 50px 98px);mask-image:radial-gradient(ellipse at center,#000,transparent 78%)}
+.ambient{position:fixed;width:520px;height:520px;top:-240px;left:50%;transform:translateX(-50%);border-radius:50%;background:#b58b3d;filter:blur(130px);opacity:.1;pointer-events:none}
+.topbar{height:82px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(18px,6vw,88px);position:relative;z-index:1;background:rgba(8,8,8,.72);backdrop-filter:blur(14px)}
+.brand{font-family:'Aref Ruqaa',serif;font-size:34px;color:var(--gold2);text-decoration:none;text-shadow:0 0 20px #d8b66a33}.brand small{font:10px 'IBM Plex Sans Arabic';color:#8e8779;display:block;margin-top:-9px;letter-spacing:2px}
+.user{display:flex;align-items:center;gap:12px;color:#d8d0c0;font-size:13px}.avatar{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;border:1px solid #806a3c;background:linear-gradient(145deg,#302718,#12110e);color:var(--gold2);font-size:18px}
+main{width:min(1080px,calc(100% - 36px));margin:0 auto;padding:62px 0 80px;position:relative;z-index:1}
+.heading{text-align:center;margin-bottom:34px}.eyebrow{color:var(--gold);font-size:12px;letter-spacing:2px;margin-bottom:12px}.heading h1{font-family:'Aref Ruqaa',serif;font-size:clamp(36px,6vw,52px);font-weight:400;color:var(--gold2);margin:0 0 8px}.heading p{margin:0;color:var(--muted);font-size:14px;line-height:1.9}
+.toolbar{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:34px 0 18px;flex-wrap:wrap}.count{color:#cfc7b8;font-size:13px}.count b{color:var(--gold2);font-size:17px;margin-left:5px}.search{width:min(320px,100%);position:relative}.search input{width:100%;border:1px solid var(--line);background:#10100e;border-radius:13px;padding:13px 42px 13px 14px;color:#fff;font:13px 'IBM Plex Sans Arabic';outline:none}.search input:focus{border-color:#b89652}.search:before{content:'⌕';position:absolute;right:15px;top:4px;font-size:26px;color:var(--gold)}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.server{border:1px solid var(--line);border-radius:18px;background:linear-gradient(145deg,rgba(25,23,18,.96),rgba(13,13,12,.98));padding:20px;min-height:206px;position:relative;overflow:hidden;transition:.25s}.server:hover{transform:translateY(-4px);border-color:rgba(216,182,106,.55);box-shadow:0 14px 40px #0008}.server:after{content:'';position:absolute;width:130px;height:130px;border:1px solid #d8b66a12;border-radius:28px;transform:rotate(45deg);left:-75px;bottom:-75px;pointer-events:none}
+.server-top{display:flex;align-items:center;gap:13px;margin-bottom:19px}.server-icon{width:54px;height:54px;border-radius:16px;display:grid;place-items:center;font-size:22px;font-weight:700;color:#f2dfb2;background:linear-gradient(145deg,#5c4825,#211b10);border:1px solid #a8874c66;flex:none}.server-icon.blue{background:linear-gradient(145deg,#243b54,#101c2a);border-color:#557da566}.server-icon.green{background:linear-gradient(145deg,#244b3b,#10231b);border-color:#5c9b7966}.server h2{font-size:16px;margin:0 0 4px;font-weight:600}.server .members{font-size:11px;color:#938b7d}.status{display:inline-flex;align-items:center;gap:6px;color:#a9d8ba;font-size:11px}.status:before{content:'';width:6px;height:6px;border-radius:50%;background:#70c491;box-shadow:0 0 9px #70c49188}.server-bottom{border-top:1px solid #ffffff0c;padding-top:15px;display:flex;align-items:center;justify-content:space-between;gap:10px}.permission{font-size:11px;color:#a69e90}.manage{border:1px solid #b89652;background:linear-gradient(135deg,#e6cd91,#b48a43);color:#17120a;border-radius:10px;padding:9px 15px;font:600 12px 'IBM Plex Sans Arabic';cursor:pointer;transition:.2s}.manage:hover{filter:brightness(1.1);transform:translateY(-1px)}
+.add-card{border:1px dashed rgba(216,182,106,.35);border-radius:18px;min-height:206px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;color:#c9b98f;background:#d8b66a08;cursor:pointer;transition:.2s}.add-card:hover{background:#d8b66a12;border-color:#d8b66a88}.plus{width:46px;height:46px;border:1px solid #b8965266;border-radius:50%;display:grid;place-items:center;font-size:27px;color:var(--gold2);margin-bottom:12px}.add-card strong{font-size:14px;font-weight:600}.add-card span:last-child{font-size:11px;color:#928979;margin-top:6px}
+.note{margin-top:24px;padding:15px 18px;border:1px solid #ffffff0c;border-radius:13px;color:#918a7d;font-size:11px;line-height:1.9;text-align:center;background:#ffffff04}.note b{color:#cdb477;font-weight:500}
+.empty{display:none;text-align:center;padding:35px;color:#aaa394;grid-column:1/-1}
+footer{text-align:center;color:#686255;font-size:11px;padding:20px;border-top:1px solid #ffffff0a}
+@media(max-width:800px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}main{padding-top:48px}}
+@media(max-width:540px){.topbar{height:72px;padding:0 18px}.brand{font-size:29px}.user span{display:none}main{width:calc(100% - 28px);padding-top:42px}.grid{grid-template-columns:1fr;gap:12px}.server{min-height:185px}.heading p{font-size:13px}.toolbar{align-items:stretch}.search{width:100%;order:2}.count{order:1}}
+</style></head>
+<body><div class="ambient"></div>
+<header class="topbar"><a class="brand" href="#">أثــر<small>لوحة التحكم</small></a><div class="user"><div class="avatar">م</div><span>مرحباً بك</span></div></header>
+<main>
+<section class="heading"><div class="eyebrow">أَثَرٌ يَبْقَى وَخَيْرٌ يَمْتَدّ</div><h1>سيرفراتك</h1><p>اختر سيرفر ديسكورد الذي تريد إدارته،<br>واجعل أثر ينشر الخير في مجتمعك.</p></section>
+<div class="toolbar"><div class="count"><b id="serverCount">3</b> سيرفرات متاحة لك</div><label class="search"><input id="search" type="search" placeholder="ابحث عن سيرفر..." aria-label="ابحث عن سيرفر"></label></div>
+<section class="grid" id="servers">
+<article class="server" data-name="مجتمع أثر"><div class="server-top"><div class="server-icon">أ</div><div><h2>مجتمع أثر</h2><div class="members">1,240 عضو</div></div></div><div class="server-bottom"><span class="permission status">لديك صلاحية الإدارة</span><button class="manage" onclick="manageServer('مجتمع أثر')">إدارة السيرفر</button></div></article>
+<article class="server" data-name="مجتمع التقنية"><div class="server-top"><div class="server-icon blue">ت</div><div><h2>مجتمع التقنية</h2><div class="members">856 عضواً</div></div></div><div class="server-bottom"><span class="permission status">لديك صلاحية الإدارة</span><button class="manage" onclick="manageServer('مجتمع التقنية')">إدارة السيرفر</button></div></article>
+<article class="server" data-name="رفاق الخير"><div class="server-top"><div class="server-icon green">خ</div><div><h2>رفاق الخير</h2><div class="members">312 عضواً</div></div></div><div class="server-bottom"><span class="permission status">لديك صلاحية الإدارة</span><button class="manage" onclick="manageServer('رفاق الخير')">إدارة السيرفر</button></div></article>
+<div class="add-card" onclick="addBot()"><span class="plus">＋</span><strong>أضف أثر إلى سيرفر آخر</strong><span>ادعُ البوت إلى سيرفرك الجديد</span></div>
+<div class="empty" id="empty">ما لقينا سيرفر بهذا الاسم.</div>
+</section>
+<div class="note"><b>خصوصيتك محفوظة:</b> ستظهر لك السيرفرات التي يتيح حساب ديسكورد الخاص بك إدارتها فقط، ولكل سيرفر إعداداته المستقلة.</div>
+</main><footer>أثر — ازرع الخير، واترك أثراً</footer>
+<script>
+// هذه معاينة للواجهة؛ ستُربط لاحقاً بتسجيل دخول Discord لجلب السيرفرات الحقيقية.
+const search=document.getElementById('search');
+search.addEventListener('input',()=>{const q=search.value.trim().toLowerCase();let n=0;document.querySelectorAll('.server').forEach(card=>{const show=card.dataset.name.toLowerCase().includes(q);card.style.display=show?'block':'none';if(show)n++});document.getElementById('empty').style.display=n?'none':'block';document.getElementById('serverCount').textContent=n});
+function manageServer(name){alert('تم اختيار سيرفر: '+name+'\nفي الخطوة التالية نجهز صفحة إعدادات السيرفر.');}
+function addBot(){alert('سيتم ربط هذا الزر بدعوة بوت أثر إلى ديسكورد.');}
+</script></body></html>
