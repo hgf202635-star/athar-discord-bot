@@ -29,20 +29,19 @@ footer{text-align:center;color:#686255;font-size:11px;padding:20px;border-top:1p
 <header class="topbar"><a class="brand" href="index.html">أثــر<small>لوحة التحكم</small></a><div class="user"><div class="avatar">م</div><span>مرحباً بك</span></div></header>
 <main>
 <section class="heading"><div class="eyebrow">أَثَرٌ يَبْقَى وَخَيْرٌ يَمْتَدّ</div><h1>سيرفراتك</h1><p>اختر سيرفر ديسكورد الذي تريد إدارته،<br>واجعل أثر ينشر الخير في مجتمعك.</p></section>
-<div class="toolbar"><div class="count"><b id="serverCount">3</b> سيرفرات متاحة لك</div><label class="search"><input id="search" type="search" placeholder="ابحث عن سيرفر..." aria-label="ابحث عن سيرفر"></label></div>
-<section class="grid" id="servers">
-<article class="server" data-name="مجتمع أثر"><div class="server-top"><div class="server-icon">أ</div><div><h2>مجتمع أثر</h2><div class="members">1,240 عضو</div></div></div><div class="server-bottom"><span class="permission status">لديك صلاحية الإدارة</span><button class="manage" onclick="manageServer('مجتمع أثر')">إدارة السيرفر</button></div></article>
-<article class="server" data-name="مجتمع التقنية"><div class="server-top"><div class="server-icon blue">ت</div><div><h2>مجتمع التقنية</h2><div class="members">856 عضواً</div></div></div><div class="server-bottom"><span class="permission status">لديك صلاحية الإدارة</span><button class="manage" onclick="manageServer('مجتمع التقنية')">إدارة السيرفر</button></div></article>
-<article class="server" data-name="رفاق الخير"><div class="server-top"><div class="server-icon green">خ</div><div><h2>رفاق الخير</h2><div class="members">312 عضواً</div></div></div><div class="server-bottom"><span class="permission status">لديك صلاحية الإدارة</span><button class="manage" onclick="manageServer('رفاق الخير')">إدارة السيرفر</button></div></article>
-<div class="add-card" onclick="addBot()"><span class="plus">＋</span><strong>أضف أثر إلى سيرفر آخر</strong><span>ادعُ البوت إلى سيرفرك الجديد</span></div>
-<div class="empty" id="empty">ما لقينا سيرفر بهذا الاسم.</div>
-</section>
+<div class="toolbar"><div class="count"><b id="serverCount">0</b> سيرفر يمكنك إدارته</div><label class="search"><input id="search" type="search" placeholder="ابحث عن سيرفر..." aria-label="ابحث عن سيرفر"></label></div><section class="grid" id="servers"><div class="empty" style="display:block">جارٍ تحميل سيرفرات حسابك...</div></section>
 <div class="note"><b>خصوصيتك محفوظة:</b> ستظهر لك السيرفرات التي يتيح حساب ديسكورد الخاص بك إدارتها فقط، ولكل سيرفر إعداداته المستقلة.</div>
 </main><footer>أثر — ازرع الخير، واترك أثراً</footer>
 <script>
-// هذه معاينة للواجهة؛ ستُربط لاحقاً بتسجيل دخول Discord لجلب السيرفرات الحقيقية.
-const search=document.getElementById('search');
-search.addEventListener('input',()=>{const q=search.value.trim().toLowerCase();let n=0;document.querySelectorAll('.server').forEach(card=>{const show=card.dataset.name.toLowerCase().includes(q);card.style.display=show?'block':'none';if(show)n++});document.getElementById('empty').style.display=n?'none':'block';document.getElementById('serverCount').textContent=n});
-function manageServer(name){localStorage.setItem('atharSelectedServer',name);location.href='dashboard.html';}
-function addBot(){location.href='https://discord.com/oauth2/authorize?client_id=1570407820375888024&permissions=2147601408&scope=bot%20applications.commands';}
+const grid=document.getElementById('servers');let guilds=[];
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function render(list){grid.innerHTML='';document.getElementById('serverCount').textContent=list.length;
+ if(!list.length){grid.innerHTML='<div class="empty" style="display:block">لا توجد سيرفرات لديك صلاحية إدارتها.</div>';return;}
+ list.forEach(g=>{const card=document.createElement('article');card.className='server';card.dataset.name=g.name;
+ const icon=g.icon?'<img alt="" style="width:54px;height:54px;border-radius:16px;object-fit:cover" src="https://cdn.discordapp.com/icons/'+g.id+'/'+g.icon+'.png?size=96">':'<div class="server-icon">'+esc(g.name.slice(0,1))+'</div>';
+ card.innerHTML='<div class="server-top">'+icon+'<div><h2>'+esc(g.name)+'</h2><div class="members">سيرفر Discord</div></div></div><div class="server-bottom"><span class="permission status">لديك صلاحية الإدارة</span><button class="manage">إدارة السيرفر</button></div>';
+ card.querySelector('button').onclick=()=>{localStorage.setItem('atharSelectedGuildId',g.id);localStorage.setItem('atharSelectedServer',g.name);location.href='dashboard.html';};grid.appendChild(card);});
+}
+fetch('/api/me').then(async r=>{if(r.status===401){location.href='/auth/discord';return null;}if(!r.ok)throw Error();return r.json();}).then(d=>{if(!d)return;guilds=d.guilds||[];document.querySelector('.user span').textContent=d.user.global_name||d.user.username;document.querySelector('.avatar').textContent=(d.user.global_name||d.user.username||'أ').slice(0,1);render(guilds);}).catch(()=>{grid.innerHTML='<div class="empty" style="display:block">تعذر تحميل السيرفرات. حدّث الصفحة وحاول مجدداً.</div>';});
+document.getElementById('search').addEventListener('input',e=>{const q=e.target.value.toLowerCase().trim();render(guilds.filter(g=>g.name.toLowerCase().includes(q)));});
 </script></body></html>
